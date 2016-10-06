@@ -1,0 +1,247 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10.10.2014, 10:31:54
+    Author     : Michal Dobes <michal.dobes.jr@gmail.com>
+*/
+
+body{
+    background-color: #999999;
+    background-image: url("background.png");
+    background-size: cover;
+    display: inline-block;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
+}
+
+.mainpage{
+    position: absolute;
+    left: 190pt;
+    min-width: 600px;
+    min-height: 600px;
+    float: left;
+    padding: 5px;
+    background: #cccccc;
+    background: -webkit-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -moz-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -ms-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -o-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: linear-gradient( to left top, #cccccc, #FFFFFF);
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 70%;
+}
+
+
+div.menu{
+    padding-right: 10px;
+    background: #cccccc;
+    background: -webkit-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -moz-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -ms-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -o-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: linear-gradient( to left top, #cccccc, #FFFFFF);
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    float: left;
+    margin-right:20px;
+    padding-bottom: 5px;
+    min-width: 160pt;
+}
+
+h3.menu{
+    margin-left: 30pt;
+    margin-bottom: 0px;
+}
+
+h4.menu{
+    margin-left: 6pt;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+a.menulink{
+    color: black;
+    text-decoration: none;
+}
+
+ul.menu{
+    margin-top: 0px;
+    padding-right: 0px;
+}
+
+li.menuitem{
+    margin-left: 0pt;
+    line-height: 5pt;
+    font-weight: bold;
+}
+
+.mapdiv{
+    float: right; 
+    width:50%; 
+    min-height: 400px;
+    min-width: 400px;
+    max-width: 50%;
+}
+
+li.street{
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #999999;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+ul.delivery{
+    list-style-type: none;
+}
+
+input{
+    width: 100%;
+}
+
+.button{
+    height: 18pt;
+    width: auto;
+}
+
+.buttontable{
+    padding-right: 15px;
+}
+
+.formtable{
+    padding-right: 15px;
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+table.resulttable{
+    min-width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+td.resulttable{
+    // Display gridlines:
+    border-bottom: 1px solid #999999;
+    border-top: 1px solid #999999;
+}
+
+.spacer{
+    min-width: 100%;
+}
+
+.selected{
+    background-color: #999999;
+    border-width: 0px;
+}
+
+.resultline{
+    position: relative;
+    left: 0px;
+    border-width: 0px;
+}
+
+td.name{
+    width: 50pt;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+td.formtd{
+    vertical-align: top;
+}
+
+td.surname{
+    width: 50pt;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+td.city{
+    width: 50px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+td.street{
+    width: 50px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+td.smallcontrols{
+    width: 50px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.box{
+    overflow: hidden;
+    border-style: solid;
+    border-color: #999999;
+    border-width: 2px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.boxheading{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.loginform{
+    position: fixed;
+    top:35%;
+    left: 35%;
+    //background
+    background: #cccccc;
+    background: -webkit-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -moz-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -ms-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: -o-linear-gradient( to left top, #cccccc, #FFFFFF);
+    background: linear-gradient( to left top, #cccccc, #FFFFFF);
+    //
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    width: content-box;
+}
+
+.mesg{
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin: 0px;
+    padding-left: 5px;
+    padding-top: 0px;
+    margin: 5px;
+    text-align: left;
+}
+
+.mesg_img{
+    position: relative;
+    margin-top: 5px;
+    margin-right: 5px;
+    top:3px;
+}
+
+.mesg_par{
+    position: relative;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 14px;
+    vertical-align: text-top;
+    margin-right: 5px;
+    top: -3px;
+}

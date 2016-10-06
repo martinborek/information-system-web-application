@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Distribuce tisku</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Martin Borek <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xborek08@stud.fit.vutbr.cz">xborek08@stud.fit.vutbr.cz</a> - Vytvoření a nastavení databáze, implementace backendu.
+			</dd>
+	<dd>Michal Dobeš <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xdobes13@stud.fit.vutbr.cz">xdobes13@stud.fit.vutbr.cz</a> - 
+		Vytvoření uživatelského rozhraní včetně grafiky, implementace frontendu.
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xdobes13/IIS">http://www.stud.fit.vutbr.cz/~xdobes13/IIS</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>12345</td><td>Administrátor</td></tr>
+<tr><td>postman</td><td>abcde</td><td>Doručovatel</td></tr>
+</table>
+
+<h2>Implementace</h2>
+<p>
+Oproti návrhu z předmětu IDS byla do databáze přidána tabulka administrátorů, kterých může být v systému více. Implementace obsahuje všechny případy použití uvedené v use-case diagramu.
+</p>
+<p>
+<!-- TODO: Stručná dokumentace k implementaci, která popisuje, které PHP skripty implementují jednotlivé případy použití uvedené v use-case diagramu z IDS. -->
+Vstupním bodem aplikace je index.php, který, podle úrovně, na kterou je uživatel autorizován, zobrazí buďto administrátorské nebo doručovatelské rozhraní. 
+Každá stránka aplikace je uvozena voláním funkce authenticate() z include/Security.php. Tato funkce zajistí, že obsah dané stránky bude zobrazen pouze uživateli s příslušným oprávněním. 
+Pokud uživatel nemá dostatečná oprávnění, zobrazí přihlašovací formulář. Funkce authenticate() rovněž zajišťuje odhlášení uživatele, pokud je nečinný. Implicitně je tato doba nastavena na 5 minut.
+</p>
+<p>
+Administrátorskou část rozhraní tvoří stránky AdminBody.php a AdminMenu.php. Na základě volby v AdminMenu volá AdminBody příslušnou funkci z modulů v include/ui. 
+Jednotlivé případy použití jsou implementovány funkcemi v modulech include/ui. Například modul include/ui/Publications.php implementuje případy užití "Přidat tiskovinu", "Odebrat tiskovinu" a "Upravit tiskovinu".
+</p>
+<p>
+    Doručovatelskou část rozhraní tvoří stránky PostmanMenu.php a PostmanBody.php. Vzhledem k tomu, že doručovatelská část systému obsahuje pouze jediný případ použití, je stránka PostmanBody napojena přímo na BackendInterface.
+<br/>
+Přihlášený doručovatel vidí seznam tiskovin, které má ten den roznést. Má možnost si tento seznam vytisknout.
+</p>
+Přehled implementace případů užití z UseCase diagramu z předmětu IDS:
+<ul>
+    <li>Přihlásit se: Security.php</li>
+    <li>Registrovat nového zákazníka: Customers.php </li>
+    <li>Evidovat platbu: Invoices.php</li>
+    <li>Přidat tiskovinu: Publications.php</li>
+    <li>Odebrat tiskovinu: Publications.php</li>
+    <li>Vyhledat fakturu: Invoices.php</li>
+    <li>Evidovat termín neodebírání tiskovin: Search.php (předpokládáme rozsáhlou databázi zákazníků, proto úpravě zákazníka předchází jeho vyhledání)</li>
+    <li>Vytvořit fakturu: Invoices.php</li>
+    <li>Zobrazit denní seznam: PostmanBody.php</li>
+</ul>
+<p>
+Všechny operace s databází jsou prováděny prostřednictvím modulu BackendInterface.php. Komunikace s tímto modulem probíhá převážně za použití tříd v adresáři include,
+které reprezentují jednotlivé entity v systému způsobem, který je vhodný jak pro databázovou část (backend), tak pro část s uživatelským rozhraním (frontend).
+</p>
+<p>
+Spravování a přidávání administrátorů, zákazníků, doručovatelů, tiskovin i odběrů je možné přímo z hlavního menu po přihlášení administrátora. Pod spravováním je možnost editace a odstranění. Evidence termínu neodebírání tiskovin je součástí editace zákazníků. Platby se evidují pod správou faktur.
+Možnost vytvořit faktury se nachází v sekci "Správa databáze".
+</p>
+<p>
+Některá data je třeba aktualizovat denně (datum následujícího výtisku publikace) a některá měsíčně (generování faktur), což by při reálném nasazení zajišťovala služba Cron, která by volala požadované scripty. V našem systému jsou tato data pro usnadnění testování a hodnocení aktualizována manuálně z uživatelského rozhraní (sekce "Správa databáze").
+</p>
+<h2>Instalace</h2>
+<ul>
+<li>Softwarové požadavky: PHP 5.3, MySQL 5.5.40</li>
+<li>Pro instalaci je třeba umístit všechny soubory v kořenovém adresáři i s adresáři res a include do kořenového adresáře webu. Poté je třeba konfigurovat a inicializovat databázi.</li>
+<li>Pro konfiguraci a inicializaci databáze stačí zavolat přiložený script db.sql. Pro usnadnění testování je v administrátorském rozhraní možnost uvedení databáze do výchozího stavu (Správa databáze &gt; Factory reset), která vymaže všechna data a nahradí je výchozími testovacími.</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Byly implementovány všechny požadavky zadání (IIS a IDS).</p>
+</body>
+</html>
